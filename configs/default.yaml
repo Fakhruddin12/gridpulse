@@ -1,0 +1,28 @@
+data:
+  start_year: 2015
+  end_year: 2026
+  timestamp_column: "SETTLEMENT_DATE"
+  indicator_column: "FORECAST_ACTUAL_INDICATOR"
+  target_column: "ND"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+model:
+  lookback_hours: 168
+  horizon_hours: 24
+  hidden_channels: 32
+  kernel_size: 3
+  dropout: 0.1
+  epochs: 30
+  batch_size: 128
+  learning_rate: 0.001
+  patience: 5
+  num_threads: 4
+validation:
+  test_fraction: 0.2
+  folds: 3
+  minimum_train_days: 365
+  validation_days: 60
+  seed: 42
+paths:
+  artifacts: "artifacts"
+  reports: "reports"

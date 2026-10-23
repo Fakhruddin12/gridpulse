@@ -1,0 +1,148 @@
+{
+  "project": "GridPulse",
+  "region": "Great Britain",
+  "source_sha256": "755f1ef7379566d7491396101a3c2fd49d3ebe9d0451e270c1b6660668b6ac09",
+  "data_start": "2015-01-01 00:00:00+00:00",
+  "data_end": "2026-09-25 22:00:00+00:00",
+  "test_start": "2024-05-22 00:00:00+00:00",
+  "test_end": "2026-09-24 00:00:00+00:00",
+  "lookback_hours": 168,
+  "horizon_hours": 24,
+  "metrics": {
+    "selected_model": "ridge",
+    "selected": {
+      "mae_mw": 1164.41943359375,
+      "rmse_mw": 1661.154541015625,
+      "smape_pct": 4.636967182159424,
+      "peak_hour_mae_mw": 1272.5849609375,
+      "n_forecasts": 856,
+      "n_hourly_predictions": 20544,
+      "mase": 0.5867601633071899
+    },
+    "seasonal_naive_week": {
+      "mae_mw": 2053.3037109375,
+      "rmse_mw": 2781.2666015625,
+      "smape_pct": 8.080668449401855,
+      "peak_hour_mae_mw": 2892.877197265625,
+      "n_forecasts": 856,
+      "n_hourly_predictions": 20544,
+      "mase": 1.0346759557724
+    },
+    "cv_mean_mae_mw": {
+      "ridge": 981.9186604817709,
+      "seasonal_naive_week": 2050.1463216145835,
+      "tcn": 1135.225341796875
+    },
+    "expanding_window_folds": [
+      {
+        "fold": 1,
+        "train_origins": 2396,
+        "validation_origins": 342,
+        "scores": {
+          "ridge": {
+            "mae_mw": 1009.3219604492188,
+            "rmse_mw": 1420.5263671875,
+            "smape_pct": 3.6231138706207275,
+            "peak_hour_mae_mw": 1260.3526611328125,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 0.5159144997596741
+          },
+          "seasonal_naive_week": {
+            "mae_mw": 1985.265380859375,
+            "rmse_mw": 2735.6142578125,
+            "smape_pct": 7.180164813995361,
+            "peak_hour_mae_mw": 2566.4921875,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 1.0147675275802612
+          },
+          "tcn": {
+            "mae_mw": 1182.480712890625,
+            "rmse_mw": 1598.9190673828125,
+            "smape_pct": 4.278720378875732,
+            "peak_hour_mae_mw": 1319.43212890625,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 0.6044245362281799
+          }
+        }
+      },
+      {
+        "fold": 2,
+        "train_origins": 2738,
+        "validation_origins": 342,
+        "scores": {
+          "ridge": {
+            "mae_mw": 962.494873046875,
+            "rmse_mw": 1375.3055419921875,
+            "smape_pct": 3.6317760944366455,
+            "peak_hour_mae_mw": 1045.3314208984375,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 0.49107301235198975
+          },
+          "seasonal_naive_week": {
+            "mae_mw": 2079.154052734375,
+            "rmse_mw": 2786.40380859375,
+            "smape_pct": 7.798386573791504,
+            "peak_hour_mae_mw": 2686.716796875,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 1.0608019828796387
+          },
+          "tcn": {
+            "mae_mw": 1106.6363525390625,
+            "rmse_mw": 1498.923583984375,
+            "smape_pct": 4.2240166664123535,
+            "peak_hour_mae_mw": 1154.319091796875,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 0.5646151900291443
+          }
+        }
+      },
+      {
+        "fold": 3,
+        "train_origins": 3080,
+        "validation_origins": 342,
+        "scores": {
+          "ridge": {
+            "mae_mw": 973.9391479492188,
+            "rmse_mw": 1353.0775146484375,
+            "smape_pct": 3.66823148727417,
+            "peak_hour_mae_mw": 1269.409912109375,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 0.49357956647872925
+          },
+          "seasonal_naive_week": {
+            "mae_mw": 2086.01953125,
+            "rmse_mw": 2775.92333984375,
+            "smape_pct": 7.923559188842773,
+            "peak_hour_mae_mw": 3099.7958984375,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 1.0571672916412354
+          },
+          "tcn": {
+            "mae_mw": 1116.5589599609375,
+            "rmse_mw": 1501.6605224609375,
+            "smape_pct": 4.260270118713379,
+            "peak_hour_mae_mw": 1414.5843505859375,
+            "n_forecasts": 342,
+            "n_hourly_predictions": 8208,
+            "mase": 0.5658574104309082
+          }
+        }
+      }
+    ],
+    "interval": {
+      "nominal_coverage": 0.8,
+      "empirical_coverage": 0.7496105919003115,
+      "mean_interval_width_mw": 3258.059765624992,
+      "residual_lower_mw": -1677.8046875,
+      "residual_upper_mw": 1580.255078125
+    }
+  }
+}
