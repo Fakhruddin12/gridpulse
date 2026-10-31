@@ -68,3 +68,20 @@ def test_settlement_periods_map_through_uk_spring_clock_change(tmp_path):
     assert len(s) == 24
     assert s.index.is_unique
     assert s.isna().sum() == 0
+
+
+def test_long_internal_gaps_are_not_partially_filled(tmp_path):
+    pd.DataFrame({"SETTLEMENT_DATE": ["01/01/2026"] * 4,
+                  "SETTLEMENT_PERIOD": [1, 2, 9, 10], "ND": [100., 100., 500., 500.]}).to_csv(
+        tmp_path / "historic_demand_data_2026.csv", index=False)
+    s = load_country_series(tmp_path, "SETTLEMENT_DATE", "ND", "FORECAST_ACTUAL_INDICATOR")
+    assert s.iloc[1:4].isna().all()
+    assert s.iloc[0] == 100 and s.iloc[4] == 500
+
+
+def test_two_hour_internal_gap_is_filled_completely(tmp_path):
+    pd.DataFrame({"SETTLEMENT_DATE": ["01/01/2026"] * 4,
+                  "SETTLEMENT_PERIOD": [1, 2, 7, 8], "ND": [100., 100., 400., 400.]}).to_csv(
+        tmp_path / "historic_demand_data_2026.csv", index=False)
+    s = load_country_series(tmp_path, "SETTLEMENT_DATE", "ND", "FORECAST_ACTUAL_INDICATOR")
+    np.testing.assert_allclose(s.to_numpy(), [100., 200., 300., 400.])

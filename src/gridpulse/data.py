@@ -131,7 +131,13 @@ def load_country_series(
     series = series.reindex(full_index)
     # Only short internal gaps are interpolated; larger gaps stay missing and are removed
     # from windows rather than smoothed across outages.
-    short_fill = series.interpolate(method="time", limit=2, limit_area="inside")
+    # Fill only entire internal runs of length <= 2. pandas' limit alone
+    # would also fill the first two positions of a longer gap.
+    missing = series.isna()
+    runs = missing.ne(missing.shift(fill_value=False)).cumsum()
+    run_lengths = missing.groupby(runs).transform("sum")
+    interpolated = series.interpolate(method="time", limit_area="inside")
+    short_fill = series.where(~(missing & run_lengths.le(2)), interpolated)
     return short_fill.rename("load_mw")
 
 

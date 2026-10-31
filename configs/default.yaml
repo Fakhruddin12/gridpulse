@@ -20,8 +20,6 @@ model:
 validation:
   test_fraction: 0.2
   folds: 3
-  minimum_train_days: 365
-  validation_days: 60
   seed: 42
 paths:
   artifacts: "artifacts"

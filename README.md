@@ -1,5 +1,11 @@
 # GridPulse: Forecasting Tomorrow's Electricity Demand
 
+[**Project report (PDF)**](reports/PROJECT_REPORT.pdf) · [**Research decision and evidence limits**](docs/RESEARCH_DECISION.md)
+
+Saved holdout MAE is 1,164.4194 MW versus weekly copying 2,053.3037 MW, a 43.29% reduction. The fresh-history replay selects the same family and gives 1,164.4299 MW. Nominal 80% intervals cover only 74.96% of holdout hours.
+
+**Research decision:** Retain Ridge for the studied retrospective task; establish timely inputs and improve interval coverage before an operational trial.
+
 **How much electricity will Great Britain need in each hour of the next day?**
 
 Electricity planning depends on anticipating demand rather than reacting after it arrives. GridPulse uses the previous week's demand and calendar information to forecast the next 24 hourly values of Great Britain's National Demand series.
@@ -52,6 +58,11 @@ After fitting, `uvicorn gridpulse.api:app --host 127.0.0.1 --port 8000` starts t
 
 ## Scope
 
-The series contains revised historical actuals, not archived real-time data vintages. Weather forecasts are excluded. National Demand is not identical to total end-use consumption. Forecast improvements have not been translated into dispatch decisions, savings or trading profit.
+The series contains revised historical actuals published 21 days in arrears, not archived real-time data vintages. A point-in-time day-ahead claim is therefore not established. Ridge and TCN receive different effective context and calendar information; this is not an equal-information architecture comparison. Forecasts cover 24 UTC hours, not a UK settlement day. Weather forecasts are excluded. National Demand is not identical to total end-use consumption. Forecast improvements have not been translated into dispatch decisions, savings or trading profit.
 
 **Author:** Fakhruddin Hakim Hussain · [Portfolio](https://github.com/Fakhruddin12)
+
+
+## October 2026 code review
+
+Only complete internal missing runs of at most two hours are now interpolated; longer gaps remain missing in full. Nine tests pass, including two gap regressions. The complete replay series has no missing input hours, so this correction leaves its benchmark unchanged. Short-gap interpolation still uses a later endpoint. Unused `minimum_train_days` and `validation_days` defaults were removed; the actual expanding-fold logic is unchanged.
